@@ -1,0 +1,90 @@
+@layer tokens {
+
+/* =========================================================
+   @property — propiedades registradas.
+   Sin registro, un valor custom no se interpola: salta de
+   A a B. Registradas con un syntax, se animan y transicionan
+   como cualquier propiedad nativa del navegador.
+   ========================================================= */
+
+@property --m1x { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+@property --m1y { syntax: '<percentage>'; inherits: false; initial-value: 40%; }
+@property --m2x { syntax: '<percentage>'; inherits: false; initial-value: 70%; }
+@property --m2y { syntax: '<percentage>'; inherits: false; initial-value: 65%; }
+@property --m3x { syntax: '<percentage>'; inherits: false; initial-value: 30%; }
+@property --m3y { syntax: '<percentage>'; inherits: false; initial-value: 80%; }
+
+/* Spotlight que sigue al puntero dentro de las tarjetas */
+@property --px { syntax: '<number>'; inherits: false; initial-value: 50; }
+@property --py { syntax: '<number>'; inherits: false; initial-value: 50; }
+@property --spot { syntax: '<number>'; inherits: false; initial-value: 0; }
+
+/* Tilt 3D sutil de las tarjetas */
+@property --rx { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@property --ry { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+
+/* Progreso de dibujo (líneas SVG y trazos) */
+@property --draw { syntax: '<number>'; inherits: false; initial-value: 1; }
+
+:root {
+  color-scheme: dark;
+
+  /* Paleta — oklch para que los mezclados con color-mix()
+     se comporten de forma perceptualmente uniforme. */
+  --bg:        oklch(0.170 0.012 168);
+  --bg-alt:    oklch(0.140 0.012 168);
+  --surface:   oklch(0.222 0.014 168);
+  --surface-2: oklch(0.255 0.016 168);
+  --border:    oklch(0.320 0.018 168);
+  --text:      oklch(0.945 0.012 105);
+  --text-muted:oklch(0.690 0.030 168);
+  --green:     oklch(0.720 0.150 160);
+  --green-deep:oklch(0.420 0.090 165);
+  --warm:      oklch(0.820 0.060 45);
+
+  /* Versiones translúcidas derivadas, no repetidas a mano */
+  --green-a12: oklch(0.720 0.150 160 / 0.12);
+  --green-a30: oklch(0.720 0.150 160 / 0.30);
+
+  /* Tipografía */
+  --font-display: 'Playfair Display', ui-serif, Georgia, serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Mono', Menlo, monospace;
+
+  /* Escala fluida (u-tipo): ratio ~1.25 con techo generoso */
+  --step--2: clamp(0.7rem,  0.67rem + 0.12vw, 0.78rem);
+  --step--1: clamp(0.82rem, 0.79rem + 0.16vw, 0.92rem);
+  --step-0:  clamp(1rem,    0.97rem + 0.18vw, 1.08rem);
+  --step-1:  clamp(1.2rem,  1.1rem  + 0.5vw,   1.45rem);
+  --step-2:  clamp(1.5rem,  1.28rem + 1.1vw,   2.1rem);
+  --step-3:  clamp(1.9rem,  1.5rem  + 2vw,      2.9rem);
+  --step-4:  clamp(2.5rem,  1.7rem  + 3.6vw,    4.6rem);
+  --step-5:  clamp(3.2rem,  1.9rem  + 5.6vw,    7rem);
+
+  /* Espaciado en escala consistente */
+  --s-1: 0.25rem;  --s-2: 0.5rem;   --s-3: 0.75rem;
+  --s-4: 1rem;     --s-5: 1.5rem;   --s-6: 2rem;
+  --s-7: 3rem;     --s-8: 4rem;     --s-9: 6rem;
+  --s-10: 8rem;    --s-11: 10rem;
+
+  /* Curvas: una sola biblioteca de easings, usada en todo el proyecto */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Radios y capas */
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --z-canvas: 0;
+  --z-content: 1;
+  --z-rail: 40;
+  --z-grain: 60;
+  --z-cursor: 70;
+  --z-loader: 90;
+
+  --page-x: clamp(20px, 5vw, 64px);
+  --measure: 62ch;
+}
+
+}

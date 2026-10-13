@@ -1,0 +1,70 @@
+@layer reduced {
+
+/* =========================================================
+   CAPA REDUCED-MOTION
+   No es un parche: es una capa completa con la misma
+   precedencia que el resto. Todo pasa a estado final,
+   nada se queda a medias y nada parpadea.
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Estado inicial: visible, no animado */
+  .js [data-reveal],
+  .js [data-illuminate],
+  .js .milestone {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .js [data-illuminate] .word,
+  .js:not(.has-gsap) [data-illuminate].is-in .word { color: var(--text) !important; }
+
+  .char { transform: none !important; }
+
+  .js .manifesto-rule { transform: scaleX(1) !important; }
+
+  /* Preloader: no cortina, no contador */
+  .preloader { display: none !important; }
+
+  /* La flor aparece abierta, sin ráfaga */
+  .bloom-petal { transform: scale(1) !important; opacity: 1 !important; }
+  .petal-shape { stroke-dashoffset: 0 !important; }
+  .bloom-halo  { opacity: 0.9 !important; transform: scale(1) !important; }
+  .bloom-core  { transform: scale(1) !important; }
+  .bloom-burst { display: none !important; }
+
+  /* Constelación trazada al instante */
+  .constellation-path { stroke-dashoffset: 0 !important; }
+
+  /* Línea de tiempo completa */
+  .timeline-path--lit { stroke-dashoffset: 0 !important; }
+
+  /* Grano estático */
+  .grain { animation: none !important; }
+
+  /* Malla del hero congelada en un buen encuadre */
+  .hero-mesh { animation: none !important; }
+
+  .scroll-cue span::after { animation: none !important; transform: translateY(40%); opacity: 0.6; }
+
+  /* Cursor personalizado: además suele incomodar */
+  .cursor { display: none !important; }
+}
+
+/* Los usuarios con reduced-motion NO reciben el preloader:
+   se omite en JS, pero esta regla garantiza que no se vea
+   aunque el JS falle en mitad de la carga. */
+html.reduced .preloader { display: none !important; }
+
+}

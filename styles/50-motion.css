@@ -1,0 +1,149 @@
+@layer motion {
+
+/* =========================================================
+   REVELADO TIPOGRÁFICO
+   El splitter (js) envuelve cada carácter/palabra en una
+   máscara .word con overflow:hidden y un .char interior.
+   El estado inicial está en CSS: si falla el JS, o si el
+   usuario tiene reduced-motion, nada se queda oculto.
+   ========================================================= */
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.18em;
+  margin-bottom: -0.18em;
+}
+
+.char {
+  display: inline-block;
+  transform: translateY(112%);
+  transition: transform 0.95s var(--ease-out-expo);
+  transition-delay: calc(var(--d, 0s) + var(--i, 0) * 0.026s);
+}
+
+.is-in .char { transform: translateY(0); }
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* =========================================================
+   ILUMINACIÓN DE PALABRAS (manifiesto)
+   Sin GSAP: stagger por clase. Con GSAP: scrub desde scroll.
+   ========================================================= */
+.js [data-illuminate] .word {
+  /* Color plano (no color-mix) para que GSAP pueda interpolarlo */
+  color: rgb(63 74 68);
+}
+.js:not(.has-gsap) [data-illuminate] .word {
+  transition: color 0.7s ease;
+  transition-delay: calc(var(--i, 0) * 0.07s);
+}
+.js:not(.has-gsap) [data-illuminate].is-in .word { color: var(--text); }
+
+.js [data-illuminate] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
+}
+.js [data-illuminate].is-in { opacity: 1; transform: none; }
+
+/* =========================================================
+   HITOS
+   ========================================================= */
+.js .milestone {
+  opacity: 0;
+  transform: translateY(32px);
+}
+.js .milestone.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+}
+
+.js .manifesto-rule {
+  transition: transform 1.2s var(--ease-out-expo) 0.25s;
+}
+.js .manifesto-rule.is-in { transform: scaleX(1); }
+
+/* =========================================================
+   KEYFRAMES
+   ========================================================= */
+
+/* Malla del hero: al estar --m* registradas (@property),
+   el navegador las interpola como cualquier métrica nativa. */
+@keyframes meshDrift {
+  0%   { --m1x: 24%; --m1y: 26%; --m2x: 78%; --m2y: 64%; --m3x: 52%; --m3y: 96%; }
+  33%  { --m1x: 64%; --m1y: 48%; --m2x: 32%; --m2y: 34%; --m3x: 78%; --m3y: 72%; }
+  66%  { --m1x: 40%; --m1y: 78%; --m2x: 66%; --m2y: 20%; --m3x: 22%; --m3y: 58%; }
+  100% { --m1x: 24%; --m1y: 26%; --m2x: 78%; --m2y: 64%; --m3x: 52%; --m3y: 96%; }
+}
+
+@keyframes cueDrop {
+  0%   { transform: translateY(-100%); }
+  55%  { transform: translateY(0); }
+  100% { transform: translateY(105%); }
+}
+
+@keyframes grainShift {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-4%, 3%); }
+  40%  { transform: translate(3%, -4%); }
+  60%  { transform: translate(-3%, -2%); }
+  80%  { transform: translate(4%, 4%); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes markerPulse {
+  0%, 100% { box-shadow: 0 0 0 5px oklch(0.72 0.15 160 / 0.14), 0 0 0 5px oklch(0.72 0.15 160 / 0); }
+  50%      { box-shadow: 0 0 0 5px oklch(0.72 0.15 160 / 0.14), 0 0 0 17px oklch(0.72 0.15 160 / 0); }
+}
+
+@keyframes nodePop {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.45); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes petalBloom {
+  0%   { transform: scale(0.15); opacity: 0; }
+  55%  { transform: scale(1.09); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes petalDraw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes haloIn {
+  from { opacity: 0; transform: scale(0.4); }
+  to   { opacity: 0.9; transform: scale(1); }
+}
+
+@keyframes coreIn {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+@keyframes ringOut {
+  0%   { opacity: 0.85; transform: scale(0.6); }
+  100% { opacity: 0; transform: scale(2.7); }
+}
+
+@keyframes burstOut {
+  0%   { opacity: 0; transform: translate(calc(var(--dx, 0px) * 0.42), calc(var(--dy, -60px) * 0.42)) scale(0.3); }
+  16%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--dx, 0px), var(--dy, -60px)) scale(1); }
+}
+
+/* =========================================================
+   LOOP DE GRANO
+   ========================================================= */
+.grain { animation: grainShift 1.4s steps(1, end) infinite; }
+
+}

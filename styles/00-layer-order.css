@@ -1,0 +1,4 @@
+/* Capa de orden: declara la precedencia de todas las hojas de estilo.
+   Cuanto más a la derecha, mayor prioridad. Ninguna regla puede "ganar"
+   por especificidad cruzando capas: el orden es literal y único. */
+@layer tokens, base, layout, components, motion, reduced;

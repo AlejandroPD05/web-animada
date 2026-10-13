@@ -1,0 +1,115 @@
+@layer layout {
+
+main {
+  position: relative;
+  z-index: var(--z-content);
+  display: block;
+}
+
+/* ============================ CABECERAS DE SECCIÓN ============================ */
+.section-head {
+  max-width: 1180px;
+  margin: 0 auto var(--s-8);
+  padding: 0 var(--page-x);
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-5);
+}
+
+.section-head-index {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.24em;
+  color: var(--green);
+  opacity: 0.7;
+}
+
+.section-head-title {
+  font-size: var(--step-3);
+}
+
+/* ============================ SECCIONES ============================ */
+.manifesto,
+.timeline-section,
+.constellation-section,
+.bloom-section {
+  position: relative;
+  padding-block: clamp(72px, 12vh, 140px);
+}
+
+/* Todos los bloques comparten UN solo eje izquierdo: el de las
+   cabeceras de sección. El padding vive dentro del contenedor de
+   1180px, no en la sección, para que nada se desalinee. */
+.manifesto { padding-inline: 0; }
+
+.timeline-section,
+.constellation-section { padding-inline: 0; }
+
+/* ============================ CONTENEDORES ============================ */
+.timeline,
+.constellation {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-inline: var(--page-x);
+}
+
+/* Container query: el contexto de diseño pasa a ser el contenedor,
+   no el viewport. Las tarjetas reaccionan al ancho real que tienen. */
+.timeline {
+  container-type: inline-size;
+  container-name: track;
+}
+
+/* ============================ COLOFÓN ============================ */
+.colophon {
+  position: relative;
+  z-index: var(--z-content);
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, transparent, oklch(0.14 0.012 168 / 0.9));
+  padding: var(--s-8) 0 var(--s-7);
+}
+
+.colophon-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-inline: var(--page-x);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-6);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.colophon-sign {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+}
+.colophon-sign span { color: var(--text-muted); font-style: italic; }
+
+.colophon-tech {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  max-width: 640px;
+}
+
+.colophon-tech li {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 12px;
+  transition: color 0.3s var(--ease-out-expo),
+              border-color 0.3s var(--ease-out-expo),
+              transform 0.3s var(--ease-out-expo);
+}
+.colophon-tech li:hover {
+  color: var(--green);
+  border-color: var(--green-a30);
+  transform: translateY(-2px);
+}
+
+}

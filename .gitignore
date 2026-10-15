@@ -8,10 +8,10 @@ Desktop.ini
 .idea/
 *.swp
 
-# Dependencias (no hay build, pero por si acaso)
+# Dependencias (no hay build, solo ESLint)
 node_modules/
-package-lock.json
 
-# Logs
+# Generados
+dist/
 *.log
 npm-debug.log*

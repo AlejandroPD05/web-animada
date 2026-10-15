@@ -9,6 +9,8 @@ tipografía cinética, constelación de fechas y una flor que abre al final.
 
 ## Cómo verlo
 
+**▶ Ver en vivo:** https://alejandropd05.github.io/web-animada/
+
 Usa un servidor local (los módulos ES no se cargan desde `file://`):
 
 ```bash
